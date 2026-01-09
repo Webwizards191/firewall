@@ -42,6 +42,11 @@
             list-style: none;
         }
 
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
         /* --- HEADER & NAVIGATION --- */
         header {
             background: var(--white);
@@ -105,35 +110,74 @@
             color: var(--white);
         }
 
-        /* --- HERO SECTION --- */
+        /* --- HERO SECTION (UPDATED) --- */
         .hero {
-            background: linear-gradient(rgba(0, 68, 204, 0.9), rgba(0, 42, 128, 0.9)), url('https://source.unsplash.com/random/1920x1080/?technology,security');
+            /* Slightly lighter gradient so the image pops */
+            background: linear-gradient(rgba(0, 68, 204, 0.85), rgba(0, 42, 128, 0.85)), url('https://source.unsplash.com/random/1920x1080/?server,network');
             background-size: cover;
             background-position: center;
-            height: 100vh;
+            /* Changed from fixed height to min-height for better mobile stacking */
+            min-height: 90vh;
             display: flex;
             align-items: center;
-            text-align: center;
             color: var(--white);
             margin-top: 80px;
             /* Offset for fixed header */
+            padding: 50px 0;
+            overflow: hidden;
         }
 
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
+        .hero-flex-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 50px;
         }
 
-        .hero h1 {
+        .hero-text {
+            flex: 1;
+            max-width: 600px;
+        }
+
+        .hero-text h1 {
             font-size: 3.5rem;
             margin-bottom: 20px;
             line-height: 1.2;
         }
 
-        .hero p {
-            font-size: 1.2rem;
+        .hero-text p {
+            font-size: 1.1rem;
             margin-bottom: 30px;
             opacity: 0.9;
+        }
+
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+        .hero-image img {
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            /* Subtle animation to make it float */
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
         }
 
         .btn-hero {
@@ -144,11 +188,12 @@
             border-radius: 50px;
             font-size: 1.1rem;
             font-weight: bold;
-            transition: transform 0.3s;
+            transition: transform 0.3s, background 0.3s;
         }
 
         .btn-hero:hover {
             transform: translateY(-3px);
+            background: #ff7722;
         }
 
         /* --- PARTNER SECTION (EPSON) --- */
@@ -288,8 +333,17 @@
         }
 
         /* --- MOBILE RESPONSIVE --- */
-        @media (max-width: 768px) {
-            .hero h1 {
+        @media (max-width: 991px) {
+
+            /* Stack hero section vertically on smaller screens */
+            .hero-flex-container {
+                flex-direction: column-reverse;
+                /* Image on top, text below */
+                text-align: center;
+                gap: 30px;
+            }
+
+            .hero-text h1 {
                 font-size: 2.5rem;
             }
 
@@ -325,11 +379,18 @@
     </header>
 
     <section id="home" class="hero">
-        <div class="container hero-content">
-            <h1>Complete Network Protection & Printer Security</h1>
-            <p>WebWizards provides advanced firewall solutions combined with Authorized Epson Technical Support. We
-                secure your digital life and ensure your hardware runs flawlessly.</p>
-            <a href="#contact" class="btn-hero">Start Free Scan</a>
+        <div class="container hero-flex-container">
+            <div class="hero-text">
+                <h1>Secure Your Network & Optimize Your Printing</h1>
+                <p>WebWizards delivers enterprise-grade firewall security combined with certified Epson technical
+                    expertise. We ensure your data is safe and your office hardware operates seamlessly, protecting you
+                    from modern digital threats.</p>
+                <a href="#contact" class="btn-hero">Get a Security Assessment</a>
+            </div>
+            <div class="hero-image">
+                <img src="image/512f8pCW7vL._SX522.png"
+                    alt="Secure Office Printer managed by WebWizards">
+            </div>
         </div>
     </section>
 
